@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Hub - Create Amazing Videos with AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #1e293b;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: #3b82f6;
+            font-size: 1.8rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #3b82f6;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-login {
+            background-color: transparent;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+        }
+        
+        .btn-login:hover {
+            background-color: #334155;
+        }
+        
+        .btn-signup {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+        }
+        
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 5%;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.1), transparent 60%);
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid #334155;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: #94a3b8;
+        }
+        
+        /* Video Demo Section */
+        .video-demo {
+            padding: 4rem 5%;
+            background-color: #1e293b;
+        }
+        
+        .video-container {
+            max-width: 900px;
+            margin: 2rem auto 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(45deg, #0f172a, #1e293b);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+        
+        /* Tools Section */
+        .tools {
+            padding: 4rem 5%;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tool-card {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #334155;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            border-color: #3b82f6;
+            transform: scale(1.03);
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #3b82f6;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 4rem 5%;
+            background-color: #1e293b;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background-color: #0f172a;
+            border-radius: 8px;
+            padding: 2.5rem;
+            width: 300px;
+            border: 1px solid #334155;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            color: #3b82f6;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #94a3b8;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .pricing-features li i {
+            color: #10b981;
+            margin-right: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            padding: 3rem 5% 1.5rem;
+            border-top: 1px solid #334155;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #3b82f6;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #3b82f6;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #1e293b;
+            border-radius: 50%;
+            color: #cbd5e1;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #3b82f6;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card, .tool-card, .pricing-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+            <h1>AI Video Hub</h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-login">Log In</button>
+            <button class="btn btn-signup">Sign Up</button>
+        </div>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h2>Create Amazing Videos with AI</h2>
+        <p>Transform your ideas into stunning videos with our powerful AI tools. Generate, edit, and enhance videos in minutes with no experience required.</p>
+        <button class="btn-primary">
+            <i class="fas fa-play-circle"></i> Try AI Video Generator
+        </button>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful AI Video Tools</h2>
+            <p>Our platform offers a comprehensive suite of AI-powered video creation tools</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>AI Video Generation</h3>
+                <p>Generate complete videos from text prompts. Simply describe what you want, and our AI will create a professional video for you.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>Video Enhancement</h3>
+                <p>Improve video quality, upscale resolution, stabilize shaky footage, and enhance colors automatically with AI.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-closed-captioning"></i>
+                </div>
+                <h3>Auto Captioning</h3>
+                <p>Automatically generate accurate captions and subtitles for your videos in multiple languages with perfect timing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Demo Section -->
+    <section class="video-demo" id="demo">
+        <div class="section-title">
+            <h2>See AI Video in Action</h2>
+            <p>Watch how our AI transforms simple text into engaging video content</p>
+        </div>
+        
+        <div class="video-container">
+            <div class="video-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <h3>AI Video Generation Demo</h3>
+                <p>This would display an example video showing AI video creation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools" id="tools">
+        <div class="section-title">
+            <h2>AI Video Tools</h2>
+            <p>Explore our collection of specialized AI tools for video creation</p>
+        </div>
+        
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-text-height"></i>
+                </div>
+                <h3>Text to Video</h3>
+                <p>Convert text descriptions into full videos with scenes, animations, and voiceovers.</p>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Video Translation</h3>
+                <p>Automatically translate and dub videos into multiple languages while preserving the original voice characteristics.</p>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <h3>AI Avatars</h3>
+                <p>Create realistic AI-powered avatars that can deliver your message in any language.</p>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>AI Soundtrack</h3>
+                <p>Generate custom background music and sound effects that match your video's mood and pacing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Choose Your Plan</h2>
+            <p>Flexible pricing options for individuals, creators, and businesses</p>
+        </div>
+        
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <p>For beginners exploring AI video</p>
+                <div class="price">$0<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 5 AI video generations/month</li>
+                    <li><i class="fas fa-check"></i> 720p video resolution</li>
+                    <li><i class="fas fa-check"></i> Basic editing tools</li>
+                    <li><i class="fas fa-check"></i> Watermark on videos</li>
+                </ul>
+                <button class="btn btn-signup" style="width: 100%;">Get Started</button>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <p>For content creators and marketers</p>
+                <div class="price">$29<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 100 AI video generations/month</li>
+                    <li><i class="fas fa-check"></i> 1080p video resolution</li>
+                    <li><i class="fas fa-check"></i> Advanced editing tools</li>
+                    <li><i class="fas fa-check"></i> No watermark</li>
+                    <li><i class="fas fa-check"></i> Priority support</li>
+                </ul>
+                <button class="btn btn-signup" style="width: 100%; background: linear-gradient(90deg, #10b981, #3b82f6);">Most Popular</button>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p>For businesses and large teams</p>
+                <div class="price">$99<span>/month</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited AI video generations</li>
+                    <li><i class="fas fa-check"></i> 4K video resolution</li>
+                    <li><i class="fas fa-check"></i> All advanced tools</li>
+                    <li><i class="fas fa-check"></i> Team collaboration</li>
+                    <li><i class="fas fa-check"></i> Custom AI training</li>
+                </ul>
+                <button class="btn btn-signup" style="width: 100%;">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AI Video Hub</h3>
+                <p>Creating the future of video content with artificial intelligence. Make professional videos in minutes, not days.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Product</h3>
+                <ul class="footer-links">
+                    <li><a href="#">AI Video Generator</a></li>
+                    <li><a href="#">Video Enhancer</a></li>
+                    <li><a href="#">Text to Speech</a></li>
+                    <li><a href="#">Auto Subtitle Generator</a></li>
+                    <li><a href="#">AI Avatar Creator</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">GDPR</a></li>
+                    <li><a href="#">Ethics Statement</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 AI Video Hub. All rights reserved. This is a demo website for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Update year in copyright
+        document.querySelector('.copyright p').innerHTML = `&copy; ${new Date().getFullYear()} AI Video Hub. All rights reserved. This is a demo website for educational purposes.`;
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(window.innerWidth <= 768) {
+                        nav.style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Button click handlers
+        document.querySelectorAll('.btn-signup, .btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Thank you for your interest! This is a demo website. In a real implementation, this would redirect to a signup page.');
+            });
+        });
+        
+        document.querySelector('.btn-login').addEventListener('click', function() {
+            alert('This is a demo website. In a real implementation, this would open a login modal or redirect to a login page.');
+        });
+    </script>
+</body>
+</html>
